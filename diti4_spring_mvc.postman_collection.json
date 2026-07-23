@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "diti4_spring_mvc API",
+    "description": "Collection de tests pour l'API REST produits / types de produits. Modifie la variable baseUrl selon ton deploiement.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/diti4_spring_mvc_war_exploded",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Produit",
+      "item": [
+        {
+          "name": "Lister les produits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/produit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "produit"]
+            }
+          }
+        },
+        {
+          "name": "Detail d'un produit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/produit/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "produit", "1"]
+            }
+          }
+        },
+        {
+          "name": "Creer un produit",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"libelle\": \"Laptop\",\n  \"prix\": 999.9,\n  \"typeProduit\": { \"id\": 1 }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/produit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "produit"]
+            }
+          }
+        },
+        {
+          "name": "Supprimer un produit",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/produit/delete/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "produit", "delete", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "TypeProduit",
+      "item": [
+        {
+          "name": "Lister les types de produit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/typeproduit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "typeproduit"]
+            }
+          }
+        },
+        {
+          "name": "Detail d'un type de produit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/typeproduit/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "typeproduit", "1"]
+            }
+          }
+        },
+        {
+          "name": "Creer un type de produit",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"libelle\": \"Electronique\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/typeproduit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "typeproduit"]
+            }
+          }
+        },
+        {
+          "name": "Supprimer un type de produit",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/typeproduit/delete/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "typeproduit", "delete", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

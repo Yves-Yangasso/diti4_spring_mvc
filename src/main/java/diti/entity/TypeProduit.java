@@ -4,8 +4,8 @@ package diti.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
-public class Produit {
+@Table(name = "type_produits")
+public class TypeProduit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,19 +13,12 @@ public class Produit {
 
     private String libelle;
 
-    private double prix;
-
-    @ManyToOne
-    @JoinColumn(name = "type_produit_id")
-    private TypeProduit typeProduit;
-
-    public Produit() {
+    public TypeProduit() {
     }
 
-    public Produit(Long id, String libelle, double prix) {
+    public TypeProduit(Long id, String libelle) {
         this.id = id;
         this.libelle = libelle;
-        this.prix = prix;
     }
 
     public Long getId() {
@@ -44,28 +37,11 @@ public class Produit {
         this.libelle = libelle;
     }
 
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    public TypeProduit getTypeProduit() {
-        return typeProduit;
-    }
-
-    public void setTypeProduit(TypeProduit typeProduit) {
-        this.typeProduit = typeProduit;
-    }
-
     @Override
     public String toString() {
-        return "Product{" +
+        return "TypeProduit{" +
                 "id=" + id +
                 ", libelle='" + libelle + '\'' +
-                ", prix=" + prix +
                 '}';
     }
 }

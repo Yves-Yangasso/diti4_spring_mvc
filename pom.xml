@@ -74,8 +74,48 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.18.2</version> <!-- Remplacez par la version stable souhaitée -->
     </dependency>
+
+    <!-- Swagger UI (assets statiques servis par l'app, spec dans openapi.json) -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>swagger-ui</artifactId>
+      <version>5.17.14</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>diti4_spring_mvc</finalName>
+    <plugins>
+      <!-- Lancer l'app avec un Tomcat 9 embarqué : mvn package cargo:run -->
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven3-plugin</artifactId>
+        <version>1.10.15</version>
+        <configuration>
+          <container>
+            <containerId>tomcat9x</containerId>
+            <artifactInstaller>
+              <groupId>org.apache.tomcat</groupId>
+              <artifactId>tomcat</artifactId>
+              <version>9.0.98</version>
+            </artifactInstaller>
+          </container>
+          <configuration>
+            <properties>
+              <cargo.servlet.port>8080</cargo.servlet.port>
+            </properties>
+          </configuration>
+          <deployables>
+            <deployable>
+              <groupId>org.example</groupId>
+              <artifactId>diti4_spring_mvc</artifactId>
+              <type>war</type>
+              <properties>
+                <context>/</context>
+              </properties>
+            </deployable>
+          </deployables>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

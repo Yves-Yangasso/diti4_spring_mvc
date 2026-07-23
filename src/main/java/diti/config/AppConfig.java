@@ -18,9 +18,9 @@ public class AppConfig {
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/diti4_pring_mvc");
+        ds.setUrl("jdbc:postgresql://localhost:5433/diti4_spring_mvc");
         ds.setUsername("postgres");
-        ds.setPassword("passer"); // adapte selon ton installation
+        ds.setPassword("gnay"); // adapte selon ton installation
 
         System.out.println("DATASOURCE");
 

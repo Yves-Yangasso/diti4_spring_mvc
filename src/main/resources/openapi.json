@@ -1,0 +1,175 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "diti4_spring_mvc API",
+    "description": "API REST de gestion des produits et types de produits.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "/" }
+  ],
+  "tags": [
+    { "name": "Produit" },
+    { "name": "TypeProduit" }
+  ],
+  "paths": {
+    "/api/produit": {
+      "get": {
+        "tags": ["Produit"],
+        "summary": "Lister tous les produits",
+        "responses": {
+          "200": {
+            "description": "Liste des produits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Produit" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Produit"],
+        "summary": "Ajouter un produit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Produit" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message de confirmation",
+            "content": { "text/plain": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/api/produit/{id}": {
+      "get": {
+        "tags": ["Produit"],
+        "summary": "Récupérer un produit par son id",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int64" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Le produit",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Produit" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/produit/delete/{id}": {
+      "delete": {
+        "tags": ["Produit"],
+        "summary": "Supprimer un produit",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int64" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message de confirmation",
+            "content": { "text/plain": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/api/typeproduit": {
+      "get": {
+        "tags": ["TypeProduit"],
+        "summary": "Lister tous les types de produit",
+        "responses": {
+          "200": {
+            "description": "Liste des types de produit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TypeProduit" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["TypeProduit"],
+        "summary": "Ajouter un type de produit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TypeProduit" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message de confirmation",
+            "content": { "text/plain": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/api/typeproduit/{id}": {
+      "get": {
+        "tags": ["TypeProduit"],
+        "summary": "Récupérer un type de produit par son id",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int64" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Le type de produit",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/TypeProduit" } }
+            }
+          }
+        }
+      }
+    },
+    "/api/typeproduit/delete/{id}": {
+      "delete": {
+        "tags": ["TypeProduit"],
+        "summary": "Supprimer un type de produit",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int64" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message de confirmation",
+            "content": { "text/plain": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TypeProduit": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "libelle": { "type": "string" }
+        }
+      },
+      "Produit": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "libelle": { "type": "string" },
+          "prix": { "type": "number", "format": "double" },
+          "typeProduit": { "$ref": "#/components/schemas/TypeProduit" }
+        }
+      }
+    }
+  }
+}

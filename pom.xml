@@ -75,6 +75,36 @@
       <version>2.18.2</version> <!-- Remplacez par la version stable souhaitée -->
     </dependency>
 
+    <!-- Bean Validation 2.0 (namespace javax, compatible Spring 5.3) -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>2.0.1.Final</version>
+    </dependency>
+
+    <!-- Implementation de Bean Validation -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.2.5.Final</version>
+      <exclusions>
+        <!-- Meme package javax.validation que validation-api ci-dessus -->
+        <exclusion>
+          <groupId>jakarta.validation</groupId>
+          <artifactId>jakarta.validation-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- EL requis par Hibernate Validator pour interpoler les messages.
+         Fourni par Tomcat 9 a l'execution, donc en scope provided. -->
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.el</artifactId>
+      <version>3.0.4</version>
+      <scope>provided</scope>
+    </dependency>
+
     <!-- Swagger UI (assets statiques servis par l'app, spec dans openapi.json) -->
     <dependency>
       <groupId>org.webjars</groupId>

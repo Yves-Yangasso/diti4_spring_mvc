@@ -1,12 +1,19 @@
 package diti.dto;
 
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class ProduitDTO {
 
     private Long id;
 
+    @NotBlank(message = "Le libelle est obligatoire")
+    @Size(min = 2, max = 100, message = "Le libelle doit contenir entre {min} et {max} caracteres")
     private String libelle;
 
+    @DecimalMin(value = "0.0", inclusive = false, message = "Le prix doit etre superieur a 0")
     private double prix;
 
     private Long typeProduitId;

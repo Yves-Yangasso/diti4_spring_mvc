@@ -1,13 +1,17 @@
 package diti.controller;
 
 
+import diti.dto.ProduitDTO;
 import diti.entity.Produit;
+import diti.mapper.ProduitMapper;
 import diti.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -17,6 +21,9 @@ public class ProduitController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProduitMapper produitMapper;
 
 
     @GetMapping
@@ -28,13 +35,18 @@ public class ProduitController {
 
 
     @GetMapping("/new")
-    public String form(){
+    public String form(Model model){
+        model.addAttribute("produit", new ProduitDTO());
         return "form-product";
     }
 
     @PostMapping
-    public String save(@ModelAttribute Produit produit){
-        productService.save(produit);
+    public String save(@Valid @ModelAttribute("produit") ProduitDTO produitDTO,
+                       BindingResult result){
+        if (result.hasErrors()) {
+            return "form-product";
+        }
+        productService.save(produitMapper.toEntity(produitDTO));
         return "redirect:/produit";
     }
 
@@ -48,8 +60,7 @@ public class ProduitController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model){
-        Produit produit =  productService.findById(id);
-        model.addAttribute("produit", produit);
+        model.addAttribute("produit", produitMapper.toDto(productService.findById(id)));
         return "form-product";
     }
 

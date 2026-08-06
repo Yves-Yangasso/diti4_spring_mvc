@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ProduitRestController {
     }
 
     @PostMapping
-    public String save(@RequestBody ProduitDTO produitDTO){
+    public String save(@Valid @RequestBody ProduitDTO produitDTO){
         productService.save(produitMapper.toEntity(produitDTO));
         return "produit ajoute avec succes";
     }

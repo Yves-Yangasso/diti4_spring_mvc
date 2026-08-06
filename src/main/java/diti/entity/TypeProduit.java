@@ -2,6 +2,8 @@ package diti.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "type_produits")
@@ -11,6 +13,8 @@ public class TypeProduit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le libelle est obligatoire")
+    @Size(min = 2, max = 100, message = "Le libelle doit contenir entre {min} et {max} caracteres")
     private String libelle;
 
     public TypeProduit() {

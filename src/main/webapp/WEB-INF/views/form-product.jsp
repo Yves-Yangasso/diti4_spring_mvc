@@ -1,11 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 
-<form action="${pageContext.request.contextPath}/produit" method="post">
-    <input type="text" value="${produit.id}" name="id" hidden="">
-    <label for="">Libelle</label>
-    <input type="text" name="libelle" value="${produit.libelle}"/>
-    <label for="">Prix</label>
-    <input type="number" name="prix" value="${produit.prix}"/>
+<form:form action="${pageContext.request.contextPath}/produit" method="post" modelAttribute="produit">
+    <form:hidden path="id"/>
+    <label for="libelle">Libelle</label>
+    <form:input path="libelle" id="libelle"/>
+    <form:errors path="libelle" cssStyle="color:red"/>
+
+    <label for="prix">Prix</label>
+    <form:input path="prix" id="prix" type="number" step="0.01"/>
+    <form:errors path="prix" cssStyle="color:red"/>
+
     <button type="submit">Enregistrer</button>
-</form>
+</form:form>

@@ -6,6 +6,7 @@ import diti.service.TypeProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class TypeProduitRestController {
     }
 
     @PostMapping
-    public String save(@RequestBody TypeProduit typeProduit){
+    public String save(@Valid @RequestBody TypeProduit typeProduit){
         typeProduitService.save(typeProduit);
         return "type produit ajoute avec succes";
     }

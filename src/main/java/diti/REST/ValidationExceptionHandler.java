@@ -1,20 +1,14 @@
 package diti.REST;
 
-
+import diti.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Transforme les erreurs de validation des controleurs REST en reponse JSON
- * { "champ": "message" } avec un statut 400.
- */
 @RestControllerAdvice(basePackages = "diti.REST")
 public class ValidationExceptionHandler {
 
@@ -26,5 +20,13 @@ public class ValidationExceptionHandler {
             erreurs.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
         return erreurs;
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleNotFound(ResourceNotFoundException ex) {
+        Map<String, String> erreur = new HashMap<>();
+        erreur.put("message", ex.getMessage());
+        return erreur;
     }
 }

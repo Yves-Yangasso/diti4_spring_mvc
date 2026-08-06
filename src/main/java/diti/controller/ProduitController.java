@@ -4,7 +4,9 @@ package diti.controller;
 import diti.dto.ProduitDTO;
 import diti.entity.Produit;
 import diti.mapper.ProduitMapper;
+import diti.entity.TypeProduit;
 import diti.service.ProductService;
+import diti.service.TypeProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,14 @@ public class ProduitController {
 
     @Autowired
     private ProduitMapper produitMapper;
+
+    @Autowired
+    private TypeProduitService typeProduitService;
+
+    @ModelAttribute("types")
+    public List<TypeProduit> types(){
+        return typeProduitService.findAll();
+    }
 
 
     @GetMapping

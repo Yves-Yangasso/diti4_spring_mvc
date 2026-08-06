@@ -12,5 +12,12 @@
     <form:input path="prix" id="prix" type="number" step="0.01"/>
     <form:errors path="prix" cssStyle="color:red"/>
 
+    <label for="typeProduitId">Type</label>
+    <form:select path="typeProduitId" id="typeProduitId">
+        <form:option value="" label="-- Choisir un type --"/>
+        <form:options items="${types}" itemValue="id" itemLabel="libelle"/>
+    </form:select>
+    <form:errors path="typeProduitId" cssStyle="color:red"/>
+
     <button type="submit">Enregistrer</button>
 </form:form>

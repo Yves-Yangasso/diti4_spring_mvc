@@ -3,6 +3,7 @@ package diti.dto;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class ProduitDTO {
@@ -16,6 +17,7 @@ public class ProduitDTO {
     @DecimalMin(value = "0.0", inclusive = false, message = "Le prix doit etre superieur a 0")
     private double prix;
 
+    @NotNull(message = "Le type est obligatoire")
     private Long typeProduitId;
 
     private String typeProduitLibelle;

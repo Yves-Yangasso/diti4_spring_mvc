@@ -2,6 +2,7 @@ package diti.service.impl;
 
 
 import diti.entity.Produit;
+import diti.exception.ResourceNotFoundException;
 import diti.repository.ProductRepository;
 import diti.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Produit findById(Long id) {
-        return repository.findById(id);
+        Produit produit = repository.findById(id);
+
+        if (produit == null) {
+            throw new ResourceNotFoundException("Produit introuvable avec l'id " + id);
+        }
+
+        return produit;
     }
 
     @Override

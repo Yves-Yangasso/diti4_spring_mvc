@@ -2,7 +2,8 @@
 
 Application web CRUD **Spring MVC** (sans Spring Boot) de gestion de **produits** et de **types de produits**, avec persistance **JPA/Hibernate** sur **PostgreSQL**. Expose une interface JSP et une API REST documentée via **Swagger UI**.
 
-## Stack technique
+## Stack technique 
+test
 
 | Composant | Version |
 |-----------|---------|

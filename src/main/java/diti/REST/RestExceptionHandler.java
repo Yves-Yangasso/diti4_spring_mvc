@@ -1,6 +1,6 @@
 package diti.REST;
 
-import diti.exception.ResourceNotFoundException;
+import diti.exception.ResourceNotFoundException; // ajoute cet import
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice(basePackages = "diti.REST")
-public class ValidationExceptionHandler {
+public class RestExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

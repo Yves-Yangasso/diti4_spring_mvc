@@ -1,13 +1,14 @@
 package diti.REST;
 
 
-import diti.entity.Produit;
+import diti.dto.ProduitDTO;
+import diti.mapper.ProduitMapper;
 import diti.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,16 +19,20 @@ public class ProduitRestController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProduitMapper produitMapper;
+
 
     @GetMapping
-    public List<Produit>  getList(){
-        List<Produit>  produits =  productService.findAll();
-        return produits;
+    public List<ProduitDTO>  getList(){
+        List<ProduitDTO> dtos = new ArrayList<>();
+        productService.findAll().forEach(produit -> dtos.add(produitMapper.toDto(produit)));
+        return dtos;
     }
 
     @PostMapping
-    public String save(@RequestBody Produit produit){
-        productService.save(produit);
+    public String save(@RequestBody ProduitDTO produitDTO){
+        productService.save(produitMapper.toEntity(produitDTO));
         return "produit ajoute avec succes";
     }
 
@@ -39,14 +44,14 @@ public class ProduitRestController {
 
 
     @GetMapping("/{id}")
-    public Produit getById(@PathVariable Long id){
-        return  productService.findById(id);
+    public ProduitDTO getById(@PathVariable Long id){
+        return  produitMapper.toDto(productService.findById(id));
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model){
-        Produit produit =  productService.findById(id);
-        model.addAttribute("produit", produit);
+        ProduitDTO produitDTO =  produitMapper.toDto(productService.findById(id));
+        model.addAttribute("produit", produitDTO);
         return "form-product";
     }
 
